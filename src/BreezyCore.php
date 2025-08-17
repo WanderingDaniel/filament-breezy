@@ -144,7 +144,7 @@ class BreezyCore implements Plugin
                     }
                 } else {
                     $panel->userMenuItems([
-                        'account' => MenuItem::make()->url($this->getMyProfilePageClass()::getUrl())->label($this->myProfile['userMenuLabel']),
+                        'account' => MenuItem::make()->url($this->getMyProfilePageClass()::getUrl())->icon('heroicon-s-user')->label($this->myProfile['userMenuLabel']),
                     ]);
                 }
             }
