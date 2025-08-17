@@ -3,10 +3,12 @@
 namespace Jeffgreco13\FilamentBreezy\Livewire;
 
 use Carbon\Carbon;
-use Filament\Forms;
-use Filament\Forms\Components\Actions;
-use Filament\Forms\Form;
+use Filament\Actions\Action;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ViewField;
 use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -27,25 +29,25 @@ class BrowserSessions extends MyProfileComponent
         //
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\ViewField::make('browserSessions')
+        return $schema
+            ->components([
+                ViewField::make('browserSessions')
                     ->label(__('filament-breezy::default.profile.browser_sessions.label'))
                     ->hiddenLabel()
                     ->view($this->listView)
                     ->viewData(['data' => self::getSessions()]),
 
                 Actions::make([
-                    Actions\Action::make('deleteBrowserSessions')
+                    Action::make('deleteBrowserSessions')
                         ->label(__('filament-breezy::default.profile.browser_sessions.logout_other_sessions'))
                         ->requiresConfirmation()
                         ->modalHeading(__('filament-breezy::default.profile.browser_sessions.logout_heading'))
                         ->modalDescription(__('filament-breezy::default.profile.browser_sessions.logout_description'))
                         ->modalSubmitActionLabel(__('filament-breezy::default.profile.browser_sessions.logout_action'))
-                        ->form([
-                            Forms\Components\TextInput::make('password')
+                        ->schema([
+                            TextInput::make('password')
                                 ->password()
                                 ->revealable()
                                 ->label(__('filament-breezy::default.fields.password'))

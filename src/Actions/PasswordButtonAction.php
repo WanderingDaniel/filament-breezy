@@ -3,7 +3,7 @@
 namespace Jeffgreco13\FilamentBreezy\Actions;
 
 use Filament\Actions\Action;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 
 class PasswordButtonAction extends Action
 {
@@ -23,8 +23,8 @@ class PasswordButtonAction extends Action
                 ->modalDescription(
                     __('filament-breezy::default.password_confirm.description')
                 )
-                ->form([
-                    Forms\Components\TextInput::make('current_password')
+                ->schema([
+                    TextInput::make('current_password')
                         ->label(__('filament-breezy::default.password_confirm.current_password'))
                         ->required()
                         ->password()
